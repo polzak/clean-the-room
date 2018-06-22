@@ -23,7 +23,6 @@ const cleanTheRoom = (arr) => {
             if (i === 0) { 
                 sameNumberArr.push(el); 
             }
-
             
             let num; //we are going to assign every element to this variable to know if it is same with the previous one
             
@@ -53,8 +52,8 @@ const cleanTheRoom = (arr) => {
     }
 
     //first, we separate numbers and strings mixed in a given array.
-    //we create numberArr to include only numbers, and stringArr including only strings.
-    const numberArr = arr.filter((el) => typeof(el) === 'number');
+    //we create numberArr to include only numbers, and stringArr to include only strings.
+    const numberArr = arr.filter((el) => typeof(el) === 'number' && !isNaN(el)); //as the type of NaN is Number, we should filter them here
     const stringArr = arr.filter((el) => typeof(el) === 'string');
 
     //sort the numbers' array
@@ -72,7 +71,7 @@ const cleanTheRoom = (arr) => {
         //convert the strings into numbers before sort them
         //if we sorted strings directly, the sort order would be in the unicode style, 
         //where '10' comes before '2'; thus convering is indispensable
-        const offStringArr = stringArr.map(str => Number(str));
+        const offStringArr = (stringArr.map(str => Number(str))).filter(el => !isNaN(el)); //filter is used to remove NaN after conversion
         offStringArr.sort(compare);
         
         //when cleaning, the strings' array is still in type of numbers 
@@ -94,7 +93,10 @@ const cleanTheRoom = (arr) => {
 };
 
 const exampleArr = [3, 2, 17, "3", 2, 1, "7", 14, "7", 17, 17, 43, 2, 5, "4", "5", "4", "7", "15"];
-const exampleArr2 = ['1', 1, '1', 1];
+const exampleArr2 = ['1', 1, 3, '3', 5, 'cc', '5', 3, '5', 3, '1', 1, 'aa', 'bb', NaN, undefined, null];
+
+const result = cleanTheRoom(exampleArr2);
+console.log(result);
 
 const generateRandomArray = () => {
     const arr = [];
@@ -108,13 +110,7 @@ const generateRandomArray = () => {
     return arr;
 }
 
-const randomArr = generateRandomArray();
-console.log(randomArr);
-const result = cleanTheRoom(randomArr);
-console.log(result);
-
-// const result = cleanTheRoom(exampleArr2);
+// const randomArr = generateRandomArray();
+// console.log(randomArr);
+// const result = cleanTheRoom(randomArr);
 // console.log(result);
-
-
-
