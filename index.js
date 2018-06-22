@@ -8,6 +8,11 @@ const cleanTheRoom = (arr) => {
     //the core function for the cleanTheRoom function.
     //it takes a sorted array, and cleans it.
     const cleanAfterSort = (sortedArr) => {
+
+        //if sortedArr has no more than one element, we do not need cleaning
+        if (sortedArr.length < 2) {
+            return sortedArr;
+        } 
         
         const cleanedArr = []; //this will be returned as a result of cleaning
         let sameNumberArr = []; //we use it to store same numbers temporarily to push them as an array into the cleanedArr
@@ -53,32 +58,63 @@ const cleanTheRoom = (arr) => {
     const stringArr = arr.filter((el) => typeof(el) === 'string');
 
     //sort the numbers' array
-    numberArr.sort(compare);
-
-    //convert the strings into numbers before sort them
-    //if we sorted strings directly, the sort order would be in the unicode style, 
-    //where '10' comes before '2'; thus convering is indispensable
-    offStringArr = stringArr.map(str => Number(str));
-    offStringArr.sort(compare);
-    
-    //clean each of the two sorted arrays; the strings' array is still in type of numbers 
+    if (numberArr.length > 1) {
+        numberArr.sort(compare);
+    }
+    //then clean it
     const cleanedNumberArr = cleanAfterSort(numberArr);
-    const cleanedOffStringArr = cleanAfterSort(offStringArr);
 
-    //convert the strings in the strings' array into numbers
-    //if an element is an array of numbers, we map it to convert each element within it, while keeping the array wrapping them
-    const cleanedStringArr = cleanedOffStringArr.map(num => {
-        if (typeof(num) === 'number') {
-            return String(num);
-        } else {
-            return num.map(el => String(el));
-        }
-    });
+    let cleanedStringArr;
+
+    if (stringArr.length < 2){ //if stringArr has no more than one element, we do not need to sort or clean it
+        cleanedStringArr = stringArr;
+    } else {
+        //convert the strings into numbers before sort them
+        //if we sorted strings directly, the sort order would be in the unicode style, 
+        //where '10' comes before '2'; thus convering is indispensable
+        const offStringArr = stringArr.map(str => Number(str));
+        offStringArr.sort(compare);
+        
+        //when cleaning, the strings' array is still in type of numbers 
+        const cleanedOffStringArr = cleanAfterSort(offStringArr);
+
+        //convert the cleaned strings into numbers
+        //if an element is an array of numbers, we map it to convert each element within it, while keeping the array that is wrapping them
+        cleanedStringArr = cleanedOffStringArr.map(num => {
+            if (typeof(num) === 'number') {
+                return String(num);
+            } else {
+                return num.map(el => String(el));
+            }
+        });
+    }
 
     //now we have both cleaned numbers' array and cleaned strings' one
     return [cleanedNumberArr, cleanedStringArr];
 };
 
 const exampleArr = [3, 2, 17, "3", 2, 1, "7", 14, "7", 17, 17, 43, 2, 5, "4", "5", "4", "7", "15"];
-const result = cleanTheRoom(exampleArr);
+const exampleArr2 = ['1', 1, '1', 1];
+
+const generateRandomArray = () => {
+    const arr = [];
+    let el;
+
+    for (let i=0; i<10; i++) {
+        el = Math.floor(Math.random()*10);
+        if (Math.random() > 0.5) { el = String(el); }
+        arr.push(el);
+    }
+    return arr;
+}
+
+const randomArr = generateRandomArray();
+console.log(randomArr);
+const result = cleanTheRoom(randomArr);
 console.log(result);
+
+// const result = cleanTheRoom(exampleArr2);
+// console.log(result);
+
+
+
