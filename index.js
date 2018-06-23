@@ -100,18 +100,22 @@ const exampleTest = () => {
     const exampleResult = cleanTheRoom(exampleArr);
     console.log(`The numbers' result after cleaning:`, exampleResult[0]);
     console.log(`The strings' result after cleaning:`, exampleResult[1]);
-
 }
 
 //a test function for a random array
 const randomTest = () => {
     const generateRandomArray = () => {
+
+        const NUMBER_OF_ELEMENTS = 20; //the number of elements in a given array
+        const RANGE_OF_NUMBERS = 10; //the range of generated numbers
+        const RATIO_OF_NUMBERS = 0.5; //the ratio of numbers to strings generated in the array. 
+
         const arr = [];
         let el;
     
-        for (let i=0; i<20; i++) {
-            el = Math.floor(Math.random()*10);
-            if (Math.random() > 0.5) { el = String(el); }
+        for (let i=0; i<NUMBER_OF_ELEMENTS; i++) {
+            el = Math.floor(Math.random()*RANGE_OF_NUMBERS);
+            if (Math.random() > RATIO_OF_NUMBERS) { el = String(el); }
             arr.push(el);
         }
         return arr;
