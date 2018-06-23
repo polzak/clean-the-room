@@ -94,15 +94,17 @@ const cleanTheRoom = (arr) => {
 
 const exampleArr = [3, 2, 17, "3", 2, 1, "7", 14, "7", 17, 17, 43, 2, 5, "4", "5", "4", "7", "15"];
 const exampleArr2 = ['1', 1, 3, '3', 5, 'cc', '5', 3, '5', 3, '1', 1, 'aa', 'bb', NaN, undefined, null];
+const exampleArr3 = [3, 1, 4, 1, '5', 2, '3', 3, '5'];
 
-const result = cleanTheRoom(exampleArr2);
-console.log(result);
+// const result = cleanTheRoom(exampleArr3);
+// console.log(`The numbers' result after cleaning:`, result[0]);
+// console.log(`The strings' result after cleaning:`, result[1]);
 
 const generateRandomArray = () => {
     const arr = [];
     let el;
 
-    for (let i=0; i<10; i++) {
+    for (let i=0; i<20; i++) {
         el = Math.floor(Math.random()*10);
         if (Math.random() > 0.5) { el = String(el); }
         arr.push(el);
@@ -110,7 +112,8 @@ const generateRandomArray = () => {
     return arr;
 }
 
-// const randomArr = generateRandomArray();
-// console.log(randomArr);
-// const result = cleanTheRoom(randomArr);
-// console.log(result);
+const randomArr = generateRandomArray();
+console.log('A randomly given array:', randomArr);
+const result = cleanTheRoom(randomArr);
+console.log(`The numbers' result after cleaning:`, result[0]);
+console.log(`The strings' result after cleaning:`, result[1]);
