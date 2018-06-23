@@ -11,3 +11,6 @@ output -> [ [ 1, 1 ], 2, [ 3, 3 ], 4 ]
 output ->
 The numbers' result after cleaning: [ [ 1, 1 ], 2, [ 3, 3 ], 4 ]
 The strings' result after cleaning: [ '3', [ '5', '5' ] ]
+
+###Test
+The index.js file includes a test function that generates and uses a random array. Whenever you run the index.js file, you get a different result from a different array given.

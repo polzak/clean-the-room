@@ -92,28 +92,37 @@ const cleanTheRoom = (arr) => {
     return [cleanedNumberArr, cleanedStringArr];
 };
 
-const exampleArr = [3, 2, 17, "3", 2, 1, "7", 14, "7", 17, 17, 43, 2, 5, "4", "5", "4", "7", "15"];
-const exampleArr2 = ['1', 1, 3, '3', 5, 'cc', '5', 3, '5', 3, '1', 1, 'aa', 'bb', NaN, undefined, null];
-const exampleArr3 = [3, 1, 4, 1, '5', 2, '3', 3, '5'];
+//a test function 
+const exampleTest = () => {
+    const exampleArr = [3, 2, 17, "3", 2, 1, "7", 14, "7", 17, 17, 43, 2, 5, "4", "5", "4", "7", "15"];
+    //const exampleArr2 = ['1', 1, 3, '3', 5, 'cc', '5', 3, '5', 3, '1', 1, 'aa', 'bb', NaN, undefined, null];
+        
+    const exampleResult = cleanTheRoom(exampleArr);
+    console.log(`The numbers' result after cleaning:`, exampleResult[0]);
+    console.log(`The strings' result after cleaning:`, exampleResult[1]);
 
-// const result = cleanTheRoom(exampleArr3);
-// console.log(`The numbers' result after cleaning:`, result[0]);
-// console.log(`The strings' result after cleaning:`, result[1]);
-
-const generateRandomArray = () => {
-    const arr = [];
-    let el;
-
-    for (let i=0; i<20; i++) {
-        el = Math.floor(Math.random()*10);
-        if (Math.random() > 0.5) { el = String(el); }
-        arr.push(el);
-    }
-    return arr;
 }
 
-const randomArr = generateRandomArray();
-console.log('A randomly given array:', randomArr);
-const result = cleanTheRoom(randomArr);
-console.log(`The numbers' result after cleaning:`, result[0]);
-console.log(`The strings' result after cleaning:`, result[1]);
+//a test function for a random array
+const randomTest = () => {
+    const generateRandomArray = () => {
+        const arr = [];
+        let el;
+    
+        for (let i=0; i<20; i++) {
+            el = Math.floor(Math.random()*10);
+            if (Math.random() > 0.5) { el = String(el); }
+            arr.push(el);
+        }
+        return arr;
+    }
+    
+    const randomArr = generateRandomArray();
+    console.log('A randomly given array:', randomArr);
+    const randomResult = cleanTheRoom(randomArr);
+    console.log(`The numbers' result after cleaning:`, randomResult[0]);
+    console.log(`The strings' result after cleaning:`, randomResult[1]);
+}
+
+//exampleTest();
+randomTest();
